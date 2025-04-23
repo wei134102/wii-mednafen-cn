@@ -18,7 +18,7 @@ jobs:
         submodules: recursive
 
     - name: Update package list
-      run: docker run raz0red/devkitppc /opt/devkitpro/pacman/bin/pacman -Syu --noconfirm
+      run: docker run raz0red/devkitppc /opt/devkitpro/pacman/bin/pacman -Q
 
     - name: Verify dist.sh existence and permissions
       run: |
