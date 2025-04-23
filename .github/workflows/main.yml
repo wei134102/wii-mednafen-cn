@@ -2,9 +2,6 @@ name: Build
 
 on:
   workflow_dispatch:  # 允许手动触发
-  # 移除定时任务，如果不需要的话
-  # schedule:
-  #   - cron: "0 0 * * *"
 
 jobs:
   build:
@@ -17,8 +14,15 @@ jobs:
       with:
         submodules: recursive
 
+    - name: Set up Docker
+      run: |
+        docker pull raz0red/devkitppc
+
     - name: Update package list
       run: docker run raz0red/devkitppc /opt/devkitpro/pacman/bin/pacman -Q
+
+    - name: Convert dist.sh to Unix line endings
+      run: dos2unix dist.sh
 
     - name: Verify dist.sh existence and permissions
       run: |
